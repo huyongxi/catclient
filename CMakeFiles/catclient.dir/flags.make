@@ -3,13 +3,13 @@
 
 # compile C with /usr/bin/cc
 # compile CXX with /usr/bin/c++
-C_FLAGS =  -Wno-discarded-qualifiers   -Wno-format-security
+C_FLAGS =  -Wno-discarded-qualifiers -g   -Wno-format-security
 
 C_DEFINES = 
 
 C_INCLUDES = -I/home/huyongxi/worksp/catclient/include -I/home/huyongxi/worksp/catclient/src -I/home/huyongxi/worksp/catclient/include/c_include 
 
-CXX_FLAGS =  -std=c++11   -Wno-format-security
+CXX_FLAGS =  -std=c++11 -g   -Wno-format-security
 
 CXX_DEFINES = 
 

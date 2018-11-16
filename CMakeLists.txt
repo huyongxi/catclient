@@ -43,6 +43,9 @@ else()
     add_definitions_c("-Wno-discarded-qualifiers")
 endif()
 
+add_cxx_flags("-g")
+add_definitions_c("-g")
+
 include_directories(include)
 include_directories(src)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/include)
