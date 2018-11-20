@@ -55,7 +55,7 @@ int main() {
     uniform_int_distribution<> dis(1,10);
     normal_distribution<> nor(100000,10000);
 
-    for(int i = 0; i < 1000; ++i){
+    for(int i = 0; i < 10; ++i){
         cat::Transaction t("call","call");
         usleep(int(nor(gen)));
 
@@ -71,15 +71,12 @@ int main() {
         e.AddData("34354","fdgfhghh");
         e.SetStatus(cat::SUCCESS);
         e.Complete();
-
-        cat::logMetricForCount("count");
-        cat::logMetricForCount("count", 3);
-        cat::logMetricForDuration("duration", 100);
+        cat::logMetricForCount("testcount", 3);
+        cat::logMetricForDuration("testduration", 100);
 
         t.Complete();
     }
 
-    
     usleep(1000000);
     cat::destroy();
 }
