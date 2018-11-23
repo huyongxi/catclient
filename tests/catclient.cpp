@@ -3,6 +3,9 @@
 #include <unistd.h>
 #include <thread>
 #include <random>
+#include <vector>
+#include <string>
+#include <sstream>
 
 #include "client.hpp"
 
@@ -43,40 +46,55 @@ void metric() {
     cat::logMetricForDuration("duration", 100);
 }
 
+
+
+
 int main() {
     cat::Config c = cat::Config();
     c.enableDebugLog = true;
-    c.encoderType = cat::ENCODER_TEXT;
+    //c.encoderType = cat::ENCODER_TEXT;
     cat::init("huyongxi_test123", c);
 
     random_device rd;
     mt19937 gen(rd());
 
     uniform_int_distribution<> dis(1,10);
-    normal_distribution<> nor(100000,10000);
+    normal_distribution<> nor(500,300);
+    
+    vector<thread> vec_thread;
 
-    for(int i = 0; i < 10; ++i){
-        cat::Transaction t("call","call");
-        usleep(int(nor(gen)));
+    for(int i = 0; i < 1; ++i){
+        vec_thread.emplace_back([&](){
+            for(int i = 0; i < 1; ++i){
+            stringstream ss;
+            ss << this_thread::get_id();
+            cat::Transaction t("call", ss.str().c_str());
 
-        t.AddData("key1","value1");
-        if(dis(gen) > 3){
-            t.SetStatus(cat::SUCCESS);
-        }else{
-            t.SetStatus(cat::FAIL);
+            if(i%10000 == 0){
+                cout << ss.str() << ":" << i << endl;
+            }
+            t.SetDurationInMillis(nor(gen));
+
+
+            t.AddData("key"+ss.str(), ss.str().c_str());
+            if(dis(gen) > 3){
+                t.SetStatus(cat::SUCCESS);
+            }else{
+                t.SetStatus(cat::FAIL);
+            }
+            cat::logEvent("logevent 123456", ss.str().c_str());
+            t.Complete();
+
+            
         }
-        cat::logEvent("logevent 123456", "test");
-
-        cat::Event e("fafdg","fdgggfg");
-        e.AddData("34354","fdgfhghh");
-        e.SetStatus(cat::SUCCESS);
-        e.Complete();
-        cat::logMetricForCount("testcount", 3);
-        cat::logMetricForDuration("testduration", 100);
-
-        t.Complete();
+        });
     }
+    
 
     usleep(1000000);
+
+    for(auto& t : vec_thread){
+        t.join();
+    }
     cat::destroy();
 }
