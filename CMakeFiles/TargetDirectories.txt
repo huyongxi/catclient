@@ -1,3 +1,0 @@
-/home/huyongxi/worksp/catclient/CMakeFiles/rebuild_cache.dir
-/home/huyongxi/worksp/catclient/CMakeFiles/catclient.dir
-/home/huyongxi/worksp/catclient/CMakeFiles/edit_cache.dir
