@@ -64,10 +64,10 @@ typedef struct _CatClientInnerConfig {
 #define DEFAULT_IP "127.0.0.1"
 #define DEFAULT_IP_HEX "7f000001"
 
-#define DEFAULT_XML_FILE "/data/appdatas/cat/client.xml"
+#define DEFAULT_XML_FILE "./data/appdatas/cat/client.xml"
 
 #if defined(__linux__) || defined(__APPLE__)
-#define DEFAULT_DATA_DIR "/data/appdatas/cat/"
+#define DEFAULT_DATA_DIR "./data/appdatas/cat/"
 #else
 #define DEFAULT_DATA_DIR "./"
 #endif
