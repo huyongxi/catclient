@@ -3,6 +3,7 @@
         "cat_clog.h": "c",
         "*.tcc": "cpp",
         "thread": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "cat_time_util.h": "c"
     }
 }

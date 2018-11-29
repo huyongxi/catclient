@@ -63,7 +63,7 @@ int main() {
     
     vector<thread> vec_thread;
 
-    for(int i = 0; i < 1; ++i){
+    for(int i = 0; i < 10; ++i){
         vec_thread.emplace_back([&](){
             for(int i = 0; i < 1; ++i){
             stringstream ss;
@@ -83,9 +83,8 @@ int main() {
                 t.SetStatus(cat::FAIL);
             }
             cat::logEvent("logevent 123456", ss.str().c_str());
+            cat::logMetricForCount("qqqqqqq");
             t.Complete();
-
-            
         }
         });
     }
